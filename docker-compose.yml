@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    container_name: carinspect-backend
+    expose:
+      - "3000"
+
+  nginx:
+    build: ./frontend
+    container_name: carinspect-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
